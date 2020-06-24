@@ -1,0 +1,16 @@
+#!/bin/bash
+
+#Today's date
+today=$(date +"%Y%m%d")
+
+#hosts to exclude from backup
+exclude="html\|maintenance-page"
+
+#cd into websites directory
+cd /var/www
+
+#find today's archive for each site and copy it to the monthly backlog directory
+ls | grep -v $exclude | xargs -L 1 -I % find ./%/archive -maxdepth 1 -type f -name "%-$today*.tar.gz" -exec cp {} %/archive/backlog/monthly \;
+
+#remove archives older than 365 days
+ls | grep -v $exclude | xargs -L 1 -I % find ./%/archive/backlog/monthly -maxdepth 1 -type f -name "*.tar.gz" -mtime +365 -exec rm {} \;

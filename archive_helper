@@ -1,0 +1,10 @@
+#!/bin/bash
+
+#cd into websites directory
+cd /var/www
+
+#list directories and exclude those which shouldn't be archived, execute database backup on each site
+ls | grep -v "html\|maintenance-page" | xargs -L 1 /usr/local/bin/archive_db.sh >> /var/log/backup.log
+
+#list directories and exclude those which shouldn't be archived, execute tar on each site
+ls | grep -v "html\|maintenance-page" | xargs -L 1 /usr/local/bin/archive.sh >> /var/log/backup.log

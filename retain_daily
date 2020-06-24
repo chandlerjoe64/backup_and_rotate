@@ -1,0 +1,13 @@
+#!/bin/bash
+
+#Today's date
+today=$(date +"%Y%m%d")
+
+#hosts to exclude from backup
+exclude="html\|maintenance-page"
+
+#cd into websites directory
+cd /var/www
+
+#remove archives older than 7 days
+ls | grep -v $exclude | xargs -L 1 -I % find ./%/archive -maxdepth 1 -type f -name "*.tar.gz" -mtime +7 -exec rm {} \;
