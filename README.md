@@ -1,7 +1,7 @@
 # backup_and_rotate
 Scripts to dynamically back up all sites on a host and rotate existing backups
 
-#Backup scripts
+#Backup scripts\n
 archive_helper: grabs a listing of vhosts in the /var/www/html dir and feeds them into xargs to be backed up by the backup script. Run daily as a cron job.
 archive_db.sh:  performs a mysqldump of the site's database, using a my.cnf file located in each vhost's backup directory for database credentials
 archive.sh      tars and gzips the contents of the vhost directory
